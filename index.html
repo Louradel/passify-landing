@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passify | Smart QR ID System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #003366;
+      --secondary-color: #0066cc;
+      --accent-color: #00ccff;
+      --dark-accent: #004d99;
+      --text-color: #ffffff;
+      --light-text: #e6f2ff;
+      --bg-gradient: linear-gradient(135deg, #0a1a3a, #003366, #0066cc);
+      --card-gradient: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      --glow-effect: 0 0 15px rgba(0, 204, 255, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(0, 204, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 102, 204, 0.15) 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    .logo-container {
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+      border-radius: 50%;
+      background: var(--card-gradient);
+      box-shadow: var(--glow-effect);
+      border: 1px solid rgba(0, 204, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-container::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(transparent, rgba(0, 204, 255, 0.6), transparent 30%);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo-container img {
+      width: 70%;
+      z-index: 1;
+      border-radius: 0;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 10px 0;
+      background: linear-gradient(to right, #ffffff, var(--accent-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin: 10px 0 30px;
+      max-width: 600px;
+      color: var(--light-text);
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      color: var(--primary-color);
+      padding: 16px 35px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.6);
+    }
+
+    .cta-button:hover::before {
+      width: 100%;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0, 204, 255, 0.5), transparent);
+    }
+
+    section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: var(--text-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: var(--card-gradient);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 350px;
+      flex: 1 1 300px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--glow-effect);
+    }
+
+    .feature-card h3 {
+      margin-top: 0;
+      color: var(--accent-color);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      margin-bottom: 0;
+      color: var(--light-text);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+
+    footer {
+      background: rgba(0, 20, 40, 0.8);
+      color: var(--text-color);
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0, 204, 255, 0.5), transparent);
+    }
+
+    footer a {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .video-container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--glow-effect);
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 40, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-container:hover .video-overlay {
+      opacity: 1;
+    }
+
+    .play-button {
+      width: 70px;
+      height: 70px;
+      background: rgba(0, 204, 255, 0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .play-button:hover {
+      background: rgba(0, 204, 255, 1);
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      section h2 {
+        font-size: 2rem;
+      }
+      
+      .logo-container {
+        width: 140px;
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Passify Logo">
+    </div>
+    <h1>Passify</h1>
+    <p>Smart QR ID System for Safer, Faster School Entry</p>
+    <a href="#contact" class="cta-button">Schedule a Demo</a>
+  </header>
+
+  <!-- Features Section -->
+  <section>
+    <h2>Why Choose Passify?</h2>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Access</h3>
+        <p>Unique QR codes for every student prevent ID sharing and unauthorized entry.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Efficient Entry</h3>
+        <p>Faster check-ins save time for students and security staff.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Real-Time Tracking</h3>
+        <p>Automated attendance logging and entry tracking for complete oversight.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section>
+    <h2>Watch Our Sales Pitch</h2>
+
+    <iframe src="https://drive.google.com/file/d/1ZbAKp2SkmdvtO33wNGmPotmTHLDb-6d7/preview" 
+        width="800" height="450" allow="autoplay" allowfullscreen></iframe>
+
+  </section>
+
+  <!-- Contact / CTA Section -->
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <p>Ready to experience the future of smart school security?</p>
+    <a href="mailto:info@passify.com" class="cta-button">Contact Us</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Passify. All rights reserved.</p>
+    <p>Email: <a href="mailto:info@passify.com">info@passify.com</a></p>
+  </footer>
+
+  <script>
+    // Simple script for video play button
+    document.addEventListener('DOMContentLoaded', function() {
+      const video = document.querySelector('video');
+      const playButton = document.querySelector('.play-button');
+      
+      if (playButton && video) {
+        playButton.addEventListener('click', function() {
+          if (video.paused) {
+            video.play();
+            document.querySelector('.video-overlay').style.opacity = '0';
+          } else {
+            video.pause();
+          }
+        });
+        
+        video.addEventListener('play', function() {
+          document.querySelector('.video-overlay').style.opacity = '0';
+        });
+        
+        video.addEventListener('pause', function() {
+          document.querySelector('.video-overlay').style.opacity = '1';
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
