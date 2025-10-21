@@ -88,7 +88,6 @@
     .logo-container img {
       width: 70%;
       z-index: 1;
-      border-radius: 0;
     }
 
     header h1 {
@@ -125,41 +124,15 @@
       z-index: 1;
     }
 
-    .cta-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
-      transition: all 0.3s ease;
-      z-index: -1;
-    }
-
     .cta-button:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 102, 204, 0.6);
-    }
-
-    .cta-button:hover::before {
-      width: 100%;
     }
 
     section {
       padding: 80px 20px;
       text-align: center;
       position: relative;
-    }
-
-    section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(0, 204, 255, 0.5), transparent);
     }
 
     section h2 {
@@ -205,21 +178,6 @@
       overflow: hidden;
     }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
-    }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--glow-effect);
-    }
-
     .feature-card h3 {
       margin-top: 0;
       color: var(--accent-color);
@@ -233,28 +191,12 @@
       color: var(--light-text);
     }
 
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--accent-color);
-    }
-
     footer {
       background: rgba(0, 20, 40, 0.8);
       color: var(--text-color);
       text-align: center;
       padding: 50px 20px;
       position: relative;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(0, 204, 255, 0.5), transparent);
     }
 
     footer a {
@@ -269,76 +211,78 @@
       text-decoration: underline;
     }
 
-    .video-container {
+    iframe {
+      width: 100%;
       max-width: 800px;
-      margin: 0 auto;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--glow-effect);
-      position: relative;
+      height: 450px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
-    video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 20, 40, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .video-container:hover .video-overlay {
-      opacity: 1;
-    }
-
-    .play-button {
-      width: 70px;
-      height: 70px;
-      background: rgba(0, 204, 255, 0.8);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .play-button:hover {
-      background: rgba(0, 204, 255, 1);
-      transform: scale(1.1);
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      header {
+        padding: 80px 20px;
+      }
+      header h1 {
+        font-size: 3rem;
+      }
+      header p {
+        font-size: 1.1rem;
+      }
     }
 
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
       }
-      
-      section h2 {
-        font-size: 2rem;
+      header p {
+        font-size: 1rem;
       }
-      
       .logo-container {
-        width: 140px;
-        height: 140px;
+        width: 130px;
+        height: 130px;
+      }
+      .feature-card {
+        max-width: 100%;
+      }
+      iframe {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 60px 15px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      header p {
+        font-size: 0.95rem;
+      }
+      .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+      section {
+        padding: 60px 15px;
+      }
+      section h2 {
+        font-size: 1.8rem;
+      }
+      iframe {
+        height: 220px;
+      }
+      .feature-card {
+        padding: 25px 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
   <header>
     <div class="logo-container">
       <img src="logo.png" alt="Passify Logo">
@@ -348,7 +292,6 @@
     <a href="#contact" class="cta-button">Schedule a Demo</a>
   </header>
 
-  <!-- Features Section -->
   <section>
     <h2>Why Choose Passify?</h2>
     <div class="features">
@@ -370,54 +313,21 @@
     </div>
   </section>
 
-  <!-- Video Section -->
   <section>
     <h2>Watch Our Sales Pitch</h2>
-
-    <iframe src="https://drive.google.com/file/d/1ZbAKp2SkmdvtO33wNGmPotmTHLDb-6d7/preview" 
-        width="800" height="450" allow="autoplay" allowfullscreen></iframe>
-
+    <iframe src="https://drive.google.com/file/d/1ZbAKp2SkmdvtO33wNGmPotmTHLDb-6d7/preview" allow="autoplay" allowfullscreen></iframe>
   </section>
 
-  <!-- Contact / CTA Section -->
   <section id="contact">
     <h2>Get in Touch</h2>
     <p>Ready to experience the future of smart school security?</p>
     <a href="mailto:info@passify.com" class="cta-button">Contact Us</a>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Passify. All rights reserved.</p>
     <p>Email: <a href="mailto:info@passify.com">info@passify.com</a></p>
   </footer>
-
-  <script>
-    // Simple script for video play button
-    document.addEventListener('DOMContentLoaded', function() {
-      const video = document.querySelector('video');
-      const playButton = document.querySelector('.play-button');
-      
-      if (playButton && video) {
-        playButton.addEventListener('click', function() {
-          if (video.paused) {
-            video.play();
-            document.querySelector('.video-overlay').style.opacity = '0';
-          } else {
-            video.pause();
-          }
-        });
-        
-        video.addEventListener('play', function() {
-          document.querySelector('.video-overlay').style.opacity = '0';
-        });
-        
-        video.addEventListener('pause', function() {
-          document.querySelector('.video-overlay').style.opacity = '1';
-        });
-      }
-    });
-  </script>
 
 </body>
 </html>
